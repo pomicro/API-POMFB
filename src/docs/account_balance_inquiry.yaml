@@ -1,0 +1,42 @@
+Returns balance of given account
+---
+tags:
+  - Inquiry about account
+
+parameters:
+  - in: header
+    name: Authorization
+    required: true
+
+  - name: body
+    description: The body should contain the account details required to process balance inquiry
+    in: body
+    required: true
+    schema:
+      type: object
+      required:
+        - "account_number"
+        - "account_type_code"
+        - "account_currency_code"
+      properties:
+        account_number:
+          type: "string"
+          example: "account1234561234562"
+        account_type_code:
+          type: "integer"
+          example: 67
+        account_currency_code:
+          type: "integer"
+          example: 685
+responses:
+  210:
+    description: Successfull API response
+  
+  403:
+    description: Data passed is not json
+
+  404:
+    description: Authentication token is wrong
+
+  400:
+    description: Any required parameter is not of correct length or type or not provided or error occurred

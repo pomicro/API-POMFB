@@ -3,6 +3,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from src.constants.code_constants import ACCOUNT_BANK_IMD_CODE_LENGTH, ACCOUNT_CURRENCY_CODE_LENGTH, ACCOUNT_NUMBER_LENGTH, ACCOUNT_TYPE_CODE_LENGTH
 from src.constants.http_status_codes import API_210_RESPONSE_CODE, HTTP_400_BAD_REQUEST, HTTP_403_FORBIDDEN, HTTP_404_NOT_FOUND
 from src.database import User
+from flasgger import swag_from
 
 title_fetch = Blueprint("title_fetch", __name__, url_prefix="/TitleFetch")
 
@@ -16,6 +17,7 @@ def invalid():
 
 @title_fetch.post('/')
 @jwt_required()
+@swag_from('./docs/title_fetch.yaml')
 def return_title():
     try:
         username = get_jwt_identity()

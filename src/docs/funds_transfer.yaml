@@ -1,0 +1,62 @@
+Process Own Account Fund Transfer
+---
+tags:
+  - Funds Transfer
+
+parameters:
+  - in: header
+    name: Authorization
+    required: true
+
+  - name: body
+    description: The body should contain the details to process funds transfer
+    in: body
+    required: true
+    schema:
+      type: object
+      required:
+        - "from_account_number"
+        - "from_account_type_code"
+        - "from_account_currency_code"
+        - "to_account_number"
+        - "to_account_type_code"
+        - "to_account_currency_code"
+        - "transaction_amount"
+        - "transaction_currency_code"
+      properties:
+        from_account_number:
+          type: "string"
+          example: "account1234561234562"
+        from_account_type_code:
+          type: "integer"
+          example: 67
+        from_account_currency_code:
+          type: "integer"
+          example: 685
+        to_account_number:
+          type: "string"
+          example: "account1234561234561"
+        to_account_type_code:
+          type: "integer"
+          example: 67
+        to_account_currency_code:
+          type: "integer"
+          example: 685
+        transaction_amount:
+          type: "integer"
+          example: 99999999900
+        transaction_currency_code:
+          type: "integer"
+          example: 685
+responses:
+  210:
+    description: Successfull API response
+  
+  403:
+    description: Data passed is not json
+
+  404:
+    description: Authentication token is wrong
+
+  400:
+    description: Any required parameter is not of correct length or type or not provided or error occurred

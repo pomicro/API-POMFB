@@ -1,0 +1,62 @@
+Process bill payment
+---
+tags:
+  - Bills
+
+parameters:
+  - in: header
+    name: Authorization
+    required: true
+
+  - name: body
+    description: The body should contain the details required to process bill payment
+    in: body
+    required: true
+    schema:
+      type: object
+      required:
+        - "utility_company_id"
+        - "consumer_number"
+        - "amount_paid"
+        - "transaction_fee"
+        - "from_account_number"
+        - "from_account_type_code"
+        - "from_account_currency_code"
+        - "transaction_description"
+      properties:
+        utility_company_id:
+          type: "string"
+          example: "PTCL0001"
+        consumer_number:
+          type: "string"
+          example: "123456123456123456123456"
+        amount_paid:
+          type: "integer"
+          example: 99009009900
+        transaction_fee:
+          type: "integer"
+          example: 90990900
+        from_account_number:
+          type: "string"
+          example: "12345123451234512345"
+        from_account_type_code:
+          type: "integer"
+          example: 55
+        from_account_currency_code:
+          type: "integer"
+          example: 526
+        transaction_description:
+          type: "string"
+          example: "Already done transaction"
+responses:
+  210:
+    description: Successfull API response
+  
+  403:
+    description: Data passed is not json
+
+  404:
+    description: Authentication token is wrong
+
+  400:
+    description: Any required parameter is not of correct length or type or not provided or error occurred

@@ -3,6 +3,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from src.constants.code_constants import ACCOUNT_CURRENCY_CODE_LENGTH, ACCOUNT_NUMBER_LENGTH, ACCOUNT_TYPE_CODE_LENGTH
 from src.constants.http_status_codes import API_210_RESPONSE_CODE, HTTP_400_BAD_REQUEST, HTTP_403_FORBIDDEN, HTTP_404_NOT_FOUND
 from src.database import User
+from flasgger import swag_from
 
 funds_transfer = Blueprint("funds_transfer", __name__, url_prefix="/FundsTransfer")
 
@@ -16,6 +17,7 @@ def invalid():
 
 @funds_transfer.post('/')
 @jwt_required()
+@swag_from('./docs/funds_transfer.yaml')
 def transfer_funds():
     try:
         username = get_jwt_identity()
