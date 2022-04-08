@@ -1,0 +1,34 @@
+User log in
+---
+tags:
+  - Authentication
+parameters:
+  - name: body
+    description: The body should contain the user login credentials
+    in: body
+    required: true
+    schema:
+      type: object
+      required:
+        - "username"
+        - "password"
+      properties:
+        username:
+          type: "string"
+          example: "exampleuser"
+        password:
+          type: "string"
+          format: "password"
+          example: "********"
+responses:
+  200:
+    description: When a user successfully logs in
+  
+  401:
+    description: A user supplies incorrect credentials
+
+  404:
+    description: username provided is not registered or error occurred
+
+  400:
+    description: username or password is not provided

@@ -1,0 +1,82 @@
+Process International Bank Fund Transfer
+---
+tags:
+  - Funds Transfer
+
+parameters:
+  - in: header
+    name: Authorization
+    required: true
+
+  - name: body
+    description: The body should contain the details required to process ibft
+    in: body
+    required: true
+    schema:
+      type: object
+      required:
+        - "from_account_bank_imd_code"
+        - "from_account_number"
+        - "from_account_type_code"
+        - "from_account_currency_code"
+        - "to_account_bank_imd_code"
+        - "to_account_number"
+        - "to_account_type_code"
+        - "to_account_currency_code"
+        - "transaction_amount"
+        - "transaction_currency_code"
+        - "transaction_fee"
+        - "length_of_narration"
+        - "transaction_narration"
+      properties:
+        from_account_bank_imd_code:
+          type: "string"
+          example: "bank1234567"
+        from_account_number:
+          type: "string"
+          example: "account1234561234562"
+        from_account_type_code:
+          type: "integer"
+          example: 67
+        from_account_currency_code:
+          type: "integer"
+          example: 685
+        to_account_bank_imd_code:
+          type: "string"
+          example: "bank1234568"
+        to_account_number:
+          type: "string"
+          example: "account1234561234561"
+        to_account_type_code:
+          type: "integer"
+          example: 67
+        to_account_currency_code:
+          type: "integer"
+          example: 685
+        transaction_amount:
+          type: "integer"
+          example: 99999999900
+        transaction_currency_code:
+          type: "integer"
+          example: 685
+        transaction_fee:
+          type: "integer"
+          example: 99999900
+        length_of_narration:
+          type: "integer"
+          example: 13
+        transaction_narration:
+          type: "string"
+          example: "Miscellaneous"
+responses:
+  210:
+    description: Successfull API response
+  
+  403:
+    description: Data passed is not json
+
+  404:
+    description: Authentication token is wrong
+
+  400:
+    description: Any required parameter is not of correct length or type or not provided or error occurred
