@@ -3,6 +3,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity#, create_refresh_token
 from src.constants.http_status_codes import HTTP_200_OK, HTTP_201_CREATED, HTTP_400_BAD_REQUEST, HTTP_401_UNAUTHORIZED, HTTP_404_NOT_FOUND, HTTP_409_CONFLICT
 from src.database import User, db
+from flasgger import swag_from
 
 authenticate = Blueprint("authenticate", __name__, url_prefix="/Authenticate")
 
@@ -53,7 +54,7 @@ def register():
         }), HTTP_400_BAD_REQUEST
 
 @authenticate.post("/Login")
-#@swag_from('./docs/auth/login.yaml')
+@swag_from('./docs/auth/login.yaml')
 def login():
     if request.json.get('username') and request.json.get('password'):
         username = request.json.get('username')

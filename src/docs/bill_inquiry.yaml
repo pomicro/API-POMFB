@@ -1,0 +1,38 @@
+Returns details about a bill to confirm before payment
+---
+tags:
+  - Bills
+
+parameters:
+  - in: header
+    name: Authorization
+    required: true
+
+  - name: body
+    description: The body should contain the details about bill
+    in: body
+    required: true
+    schema:
+      type: object
+      required:
+        - "utility_company_id"
+        - "consumer_number"
+      properties:
+        utility_company_id:
+          type: "string"
+          example: "PTCL0001"
+        consumer_number:
+          type: "string"
+          example: "123456123456123456123456"
+responses:
+  210:
+    description: Successfull API response
+  
+  403:
+    description: Data passed is not json
+
+  404:
+    description: Authentication token is wrong
+
+  400:
+    description: Any required parameter is not of correct length or type or not provided or error occurred

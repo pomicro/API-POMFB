@@ -3,6 +3,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from src.constants.code_constants import ACCOUNT_CURRENCY_CODE_LENGTH, ACCOUNT_NUMBER_LENGTH, ACCOUNT_TYPE_CODE_LENGTH
 from src.constants.http_status_codes import API_210_RESPONSE_CODE, HTTP_400_BAD_REQUEST, HTTP_403_FORBIDDEN, HTTP_404_NOT_FOUND
 from src.database import User
+from flasgger import swag_from
 
 account_balance_inquiry = Blueprint("account_balance_inquiry", __name__, url_prefix="/AccountBalanceInquiry")
 
@@ -15,8 +16,8 @@ def invalid():
     }), HTTP_403_FORBIDDEN
 
 @account_balance_inquiry.post('/')
-#@swag_from('./docs/account_balance_inquiry.yaml')
 @jwt_required()
+@swag_from('./docs/account_balance_inquiry.yaml')
 def return_balance_inquiry():
 
     try:
@@ -26,10 +27,10 @@ def return_balance_inquiry():
         if user:
 
             if request.is_json:
-                print(request.is_json)
+                #print(request.is_json)
 
                 if request.json.get('Account_Number') and request.json.get('Account_Type_Code') and request.json.get('Account_Currency_Code'):
-                    print("available")
+                    #print("available")
                     account_number = request.json.get('Account_Number')
                     account_type_code = request.json.get('Account_Type_Code')
                     account_currency_code = request.json.get('Account_Currency_Code')

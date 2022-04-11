@@ -3,6 +3,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from src.constants.code_constants import BILL_CONSUMER_NUMBER_LENGTH, UTILITY_COMPANY_ID_LENGTH
 from src.constants.http_status_codes import API_210_RESPONSE_CODE, HTTP_400_BAD_REQUEST, HTTP_403_FORBIDDEN, HTTP_404_NOT_FOUND
 from src.database import User
+from flasgger import swag_from
 
 bill_inquiry = Blueprint("bill_inquiry", __name__, url_prefix="/BillInquiry")
 
@@ -16,6 +17,7 @@ def invalid():
 
 @bill_inquiry.post('/')
 @jwt_required()
+@swag_from('./docs/bill_inquiry.yaml')
 def return_balance_inquiry():
     try:
         username = get_jwt_identity()
